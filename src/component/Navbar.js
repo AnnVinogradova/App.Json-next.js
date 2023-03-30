@@ -27,7 +27,9 @@ export default function Navbar() {
 						</li>
 					</ul>
 				</div>
-				<link className='btn btn-outline-light w-26' to='/user/add'>Add Users</link>
+				<li className="nav-item">
+					<NavLink className='btn btn-outline-light w-26' aria-current='page' to="/user/add">Add Users</NavLink>
+				</li>
 			</div>
 		</nav>
 	</>

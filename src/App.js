@@ -3,7 +3,7 @@ import Home from './component/Home'
 import About from './component/About'
 import Contact from './component/Contact'
 import Navbar from './component/Navbar'
-import AddUser from './component/AddUser'
+import AddUser from './component/users/AddUser'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 export default function App() {
