@@ -18,7 +18,7 @@ export default function App() {
 					<Route exact path='/about' component={About} />
 					<Route exact path='/contact' component={Contact} />
 					<Route exact path='/user/add' component={AddUser} />
-					<Route exact path='/user/edit' component={EditUser} />
+					<Route exact path='/user/edit/:id' component={EditUser} />
 				</Switch>
 			</div>
 		</Router>

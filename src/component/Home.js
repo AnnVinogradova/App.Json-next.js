@@ -6,13 +6,18 @@ export default function Home() {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
-		loadUsers();
+		loadUser();
 	}, []);
 
-	const loadUsers = async () => {
+	const loadUser = async () => {
 		const result = await axios.get('https://jsonplaceholder.typicode.com/users');
 		setUsers(result.data)
 	}
+
+	const deleteUser = async id =>{
+		await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+		loadUser();
+	}	
 	return <>
 		<div>
 			<h1>Home Page</h1>
@@ -43,8 +48,8 @@ export default function Home() {
 							<td>{user.company?.name}</td>
 							<td>
 								<Link className='btn btn-primary m-2'>View</Link>
-								<Link className='btn btn-primary m-2'to='/user/edit'>Edit</Link>
-								<Link className='btn btn-danger m-2'>Delete</Link>
+								<Link className='btn btn-primary m-2'to={`/user/edit/${user.id}`}>Edit</Link>
+								<Link className='btn btn-danger m-2'onClick={()=>{deleteUser}}>Delete</Link>
 							</td>
 						</tr>
 					))}

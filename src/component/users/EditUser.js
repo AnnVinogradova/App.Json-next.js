@@ -1,4 +1,4 @@
-import axios from axios
+import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useHistory,useParams } from "react-router-dom"
 
@@ -34,7 +34,7 @@ const onSubmit = async evt =>{
 const loadUser = async ()=>{
     const result = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
     setUser(result.data);
-}
+};
     return<>
   <div className="container">
 			<div className="w-75 mx-auto shadow p-5">
@@ -103,7 +103,7 @@ const loadUser = async ()=>{
 							onChange={evt => onInputChange(evt)}>
 						</input>
 					</div>
-					<button className="btn btn-primary btn-block">Add User</button>
+					<button className="btn btn-primary btn-block">Edit User</button>
 				</form>
 			</div>
 		</div>
