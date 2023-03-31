@@ -1,97 +1,105 @@
 import { useState } from "react"
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+
 
 export default function AddUser() {
-	let history=useHistory();
-	const [user, setUser]=useState({
-		name:'',
-		username:'',
-		email:'',
-		address:'',
-		phone:'',
-		website:'',
-		company:'',
-});
-const {name, username,email,address, phone,website,company}=user;
-const onInputChange = evt =>{
-	setUser({...user,[evt.target.name]:evt.target.value});
-};
 
-const onSubmit = async evt =>{
-	evt.preventDefault();
-	await axios.post('https://jsonplaceholder.typicode.com/users', user);
-	history.push('/');
-};
+	const [name, setName] = useState('');
+	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
+	const [address, setAddress] = useState('');
+	const [phone, setPhone] = useState('');
+	const [website, setWebsite] = useState('');
+	const [company, setCompany] = useState('');
+
+	const navigate = useNavigate()
+
+	const data = {
+		name: name,
+		username: username,
+		email: email,
+		address: address.city,
+		phone: phone,
+		website: website,
+		company: company.name
+	}
+	function Submit(evt) {
+		evt.preventDefault();
+		axios.post('https://jsonplaceholder.typicode.com/users', data)
+			.then(
+				navigate('/')
+			)
+	}
 	return <>
 		<div className="container">
 			<div className="w-75 mx-auto shadow p-5">
 				<h2 className="text-center mb-4">Add User</h2>
-				<form onSubmit={evt => onSubmit(evt)}>
+				<form>
 					<div className="form-group">
 						<input type="text"
 							className="form-control form-control-lg"
 							placeholder="Enter Your Name"
-							name="name"
 							value={name}
-							onChange={evt => onInputChange(evt)}>
+							onChange={(evt) => setName(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
 						<input type="text"
 							className="form-control form-control-lg"
 							placeholder="Enter Your User Name"
-							name="username"
 							value={username}
-							onChange={evt => onInputChange(evt)}>
+							onChange={(evt) => setUsername(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
 						<input type="email"
 							className="form-control form-control-lg"
 							placeholder="Enter Your Email"
-							name="email"
 							value={email}
-							onChange={evt => onInputChange(evt)}>
+							onChange={(evt) => setEmail(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
 						<input type="text"
 							className="form-control form-control-lg"
 							placeholder="Enter Your City"
-							name="city"
-							value={address?.city}
-							onChange={evt => onInputChange(evt)}>
+							value={address}
+							onChange={(evt) => setAddress(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
-						<input type="text"
+						<input type="phone"
 							className="form-control form-control-lg"
 							placeholder="Enter Your Phone"
-							name="phone"
 							value={phone}
-							onChange={evt => onInputChange(evt)}>
+							onChange={(evt) => setPhone(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
 						<input type="text"
 							className="form-control form-control-lg"
 							placeholder="Enter Your Website"
-							name="website"
 							value={website}
-							onChange={evt => onInputChange(evt)}>
+							onChange={(evt) => setWebsite(evt.target.value)}
+						>
 						</input>
 					</div>
 					<div className="form-group">
 						<input type="text"
 							className="form-control form-control-lg"
 							placeholder="Enter Your Company"
-							name="company"
-							value={company?.name}
-							onChange={evt => onInputChange(evt)}>
+							value={company}
+							onChange={(evt) => setCompany(evt.target.value)}
+						>
 						</input>
 					</div>
-					<button className="btn btn-primary btn-block">Add User</button>
+					<button onClick={Submit} className="btn btn-primary btn-block">Add User</button>
 				</form>
 			</div>
 		</div>

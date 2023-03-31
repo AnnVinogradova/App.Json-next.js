@@ -1,9 +1,11 @@
 import axios from 'axios'
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useHistory,useParams } from "react-router-dom"
 
 export default function EditUser(){
     let history = useHistory();
+
+	
     const {id} = useParams();
     
     const [user, setUser]=useState({
@@ -21,9 +23,7 @@ const onInputChange = evt =>{
 	setUser({...user,[evt.target.name]:evt.target.value});
 };
 
-useEffect(()=>{
-    loadUser();
-},[]);
+
 
 const onSubmit = async evt =>{
 	evt.preventDefault();
@@ -31,10 +31,10 @@ const onSubmit = async evt =>{
 	history.push('/');
 };
 
-const loadUser = async ()=>{
-    const result = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
-    setUser(result.data);
-};
+// const loadUser = async ()=>{
+//     const result = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+//     setUser(result.data);
+// };
     return<>
   <div className="container">
 			<div className="w-75 mx-auto shadow p-5">
