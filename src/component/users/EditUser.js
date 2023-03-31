@@ -1,10 +1,12 @@
-import { useState } from "react"
-import axios from 'axios'
-import { useHistory } from "react-router-dom";
+import axios from axios
+import { useState, useEffect } from "react";
+import { useHistory,useParams } from "react-router-dom"
 
-export default function AddUser() {
-	let history=useHistory();
-	const [user, setUser]=useState({
+export default function EditUser(){
+    let history = useHistory();
+    const {id} = useParams();
+    
+    const [user, setUser]=useState({
 		name:'',
 		username:'',
 		email:'',
@@ -13,20 +15,30 @@ export default function AddUser() {
 		website:'',
 		company:'',
 });
+
 const {name, username,email,address, phone,website,company}=user;
 const onInputChange = evt =>{
 	setUser({...user,[evt.target.name]:evt.target.value});
 };
 
+useEffect(()=>{
+    loadUser();
+},[]);
+
 const onSubmit = async evt =>{
 	evt.preventDefault();
-	await axios.post('https://jsonplaceholder.typicode.com/users', user);
+	await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, user);
 	history.push('/');
 };
-	return <>
-		<div className="container">
+
+const loadUser = async ()=>{
+    const result = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+    setUser(result.data);
+}
+    return<>
+  <div className="container">
 			<div className="w-75 mx-auto shadow p-5">
-				<h2 className="text-center mb-4">Add User</h2>
+				<h2 className="text-center mb-4">Edit User</h2>
 				<form onSubmit={evt => onSubmit(evt)}>
 					<div className="form-group">
 						<input type="text"
@@ -95,5 +107,5 @@ const onSubmit = async evt =>{
 				</form>
 			</div>
 		</div>
-	</>
+    </>
 }

@@ -1,10 +1,10 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default function Navbar() {
 	return <>
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
-				<a className="navbar-brand" href="#">JsonUsers</a>
+				<span className="navbar-brand">JsonUsers</span>
 				<button className="navbar-toggler"
 					type="button"
 					data-bs-toggle="collapse"

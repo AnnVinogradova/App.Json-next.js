@@ -43,7 +43,7 @@ export default function Home() {
 							<td>{user.company?.name}</td>
 							<td>
 								<Link className='btn btn-primary m-2'>View</Link>
-								<Link className='btn btn-primary m-2'>Edit</Link>
+								<Link className='btn btn-primary m-2'to='/user/edit'>Edit</Link>
 								<Link className='btn btn-danger m-2'>Delete</Link>
 							</td>
 						</tr>
